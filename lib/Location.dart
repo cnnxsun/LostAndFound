@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart'
+    show
+        CameraPosition,
+        GoogleMap,
+        GoogleMapController,
+        InfoWindow,
+        LatLng,
+        Marker,
+        MarkerId;
 import 'package:location/location.dart';
 import 'homepage.dart';
 import 'package:project1/chat.dart';
@@ -100,6 +108,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
       });
     }
   }
+
   final LatLng _center = const LatLng(45.521563, -122.677433);
   @override
   Widget build(BuildContext context) {
