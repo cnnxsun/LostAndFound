@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045083646577",
+    "project_id": "predictive-net-405712",
+    "storage_bucket": "predictive-net-405712.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045083646577:android:08e8339eb2544d7d59c9d0",
+        "android_client_info": {
+          "package_name": "com.example.project1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArK_e8PVjbo_G64oPxgj0cMc6Y6TKRcPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
