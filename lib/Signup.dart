@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project1/SignIn.dart';
 
@@ -217,28 +218,33 @@ class __FormContentState extends State<_FormContent> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                   ),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
-                    print("Fullname: $fullName");
-                    print("UserName: $userName");
-                    print("Email: $email");
-                    print("Password: $password");
-                    print("ConfirmPassword: $confirmPassword");
-                  }
-                },
-              ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Sign Up',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      Map<String, String> dataToSave = {
+                        'fullName': fullName.toString(),
+                        'email': email.toString(),
+                        'password': password.toString(),
+                        'username': userName.toString(),
+                        'userID': "",
+                        'avatar': ""
+                      };
+                      FirebaseFirestore.instance
+                          .collection('User')
+                          .add(dataToSave);
+                    }
+                  }),
             ),
             _gap(),
             TextButton(

@@ -44,38 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAznoyPqS4o9vDe2AZ_xE759Fi9n6jpIFQ',
-    appId: '1:1045083646577:web:46db038cf7fc3e6559c9d0',
-    messagingSenderId: '1045083646577',
-    projectId: 'predictive-net-405712',
-    authDomain: 'predictive-net-405712.firebaseapp.com',
-    storageBucket: 'predictive-net-405712.appspot.com',
-    measurementId: 'G-7QT30CXZ93',
+    apiKey: 'AIzaSyDdFA-fNlikmZe1nhOWHGk-2uERi-tC9R4',
+    appId: '1:146947830304:web:0f4ebd96907bc75776c245',
+    messagingSenderId: '146947830304',
+    projectId: 'test-ed748',
+    authDomain: 'test-ed748.firebaseapp.com',
+    storageBucket: 'test-ed748.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyArK_e8PVjbo_G64oPxgj0cMc6Y6TKRcPg',
-    appId: '1:1045083646577:android:08e8339eb2544d7d59c9d0',
-    messagingSenderId: '1045083646577',
-    projectId: 'predictive-net-405712',
-    storageBucket: 'predictive-net-405712.appspot.com',
+    apiKey: 'AIzaSyB2DV82hNnooX5nDstHrHIz1N9TuF8Xiaw',
+    appId: '1:146947830304:android:4f040b4e1586f20176c245',
+    messagingSenderId: '146947830304',
+    projectId: 'test-ed748',
+    storageBucket: 'test-ed748.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDe50YePM_XwujjsrZo_Sa4n3gAmB8M-64',
-    appId: '1:1045083646577:ios:8d533f0178e1d61f59c9d0',
-    messagingSenderId: '1045083646577',
-    projectId: 'predictive-net-405712',
-    storageBucket: 'predictive-net-405712.appspot.com',
+    apiKey: 'AIzaSyCxreXMDyrrQ3cokXFhejTvhjsMU2RyRUM',
+    appId: '1:146947830304:ios:7bb0ecd783e4141676c245',
+    messagingSenderId: '146947830304',
+    projectId: 'test-ed748',
+    storageBucket: 'test-ed748.appspot.com',
     iosBundleId: 'com.example.project1',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDe50YePM_XwujjsrZo_Sa4n3gAmB8M-64',
-    appId: '1:1045083646577:ios:245b24057b0e43f159c9d0',
-    messagingSenderId: '1045083646577',
-    projectId: 'predictive-net-405712',
-    storageBucket: 'predictive-net-405712.appspot.com',
+    apiKey: 'AIzaSyCxreXMDyrrQ3cokXFhejTvhjsMU2RyRUM',
+    appId: '1:146947830304:ios:ae0856615001823876c245',
+    messagingSenderId: '146947830304',
+    projectId: 'test-ed748',
+    storageBucket: 'test-ed748.appspot.com',
     iosBundleId: 'com.example.project1.RunnerTests',
   );
 }

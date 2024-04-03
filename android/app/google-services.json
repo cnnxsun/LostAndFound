@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "1045083646577",
-    "project_id": "predictive-net-405712",
-    "storage_bucket": "predictive-net-405712.appspot.com"
+    "project_number": "146947830304",
+    "project_id": "test-ed748",
+    "storage_bucket": "test-ed748.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1045083646577:android:08e8339eb2544d7d59c9d0",
+        "mobilesdk_app_id": "1:146947830304:android:07091dba8563d0a676c245",
         "android_client_info": {
-          "package_name": "com.example.project1"
+          "package_name": "com.example.project"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyArK_e8PVjbo_G64oPxgj0cMc6Y6TKRcPg"
+          "current_key": "AIzaSyB2DV82hNnooX5nDstHrHIz1N9TuF8Xiaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146947830304:android:4f040b4e1586f20176c245",
+        "android_client_info": {
+          "package_name": "com.example.LostAndFound"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2DV82hNnooX5nDstHrHIz1N9TuF8Xiaw"
         }
       ],
       "services": {

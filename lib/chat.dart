@@ -5,6 +5,8 @@ import 'package:project1/message.dart';
 import 'package:project1/noti1.dart';
 import 'package:project1/dot_navigation_bar.dart';
 import 'package:project1/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 enum _SelectedTab { Home, AddPost, Chat, Profile } // Nav bar
 
@@ -91,11 +93,21 @@ class _Chat extends State<Chat> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-          child: ListView.builder(
-              itemCount: ChatData.dummyData.length,
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('chat')
+            .orderBy('datetime', descending: true)
+            .snapshots()
+            .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (snapshot.hasData) {
+            final chatData = snapshot.data!;
+            return ListView.builder(
+              itemCount: chatData.length,
               itemBuilder: (context, index) {
-                ChatData _model = ChatData.dummyData[index];
+                final _message = chatData[index];
                 return Column(
                   children: <Widget>[
                     Divider(
@@ -104,25 +116,29 @@ class _Chat extends State<Chat> {
                     GestureDetector(
                       child: ListTile(
                         leading: CircleAvatar(
-                            radius: 24.0,
-                            backgroundImage: AssetImage(_model.avatar)),
+                          radius: 24.0,
+                          backgroundImage: AssetImage(
+                              _message['avatar']), // assuming avatar is a path
+                        ),
                         title: Row(
                           children: <Widget>[
                             Text(
-                              _model.name,
+                              _message['name'],
                               style: TextStyle(fontSize: 20.0),
                             ),
                             SizedBox(
                               width: 16.0,
                             ),
                             Text(
-                              _model.datetime,
+                              _formatTimestamp(
+                                _message['datetime'],
+                              ),
                               style: TextStyle(fontSize: 15.0),
                             ),
                           ],
                         ),
                         subtitle: Text(
-                          _model.message,
+                          _message['message'],
                           style: TextStyle(fontSize: 18.0),
                         ),
                       ),
@@ -130,14 +146,21 @@ class _Chat extends State<Chat> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  Message(chatID: _model.chatID)),
+                            builder: (context) =>
+                                Message(chatID: _message['chatID']),
+                          ),
                         );
                       },
-                    )
+                    ),
                   ],
                 );
-              })),
+              },
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
       bottomNavigationBar: SizedBox(
         // Nav bar
         height: 160,
@@ -183,34 +206,7 @@ class _Chat extends State<Chat> {
   }
 }
 
-class ChatData {
-  final int chatID;
-  final String avatar;
-  final String name;
-  final String datetime;
-  final String message;
-
-  ChatData(
-      {required this.chatID,
-      required this.avatar,
-      required this.name,
-      required this.datetime,
-      required this.message});
-
-  static final List<ChatData> dummyData = [
-    ChatData(
-      chatID: 1,
-      avatar: "Guwon.png",
-      name: "Guwon",
-      datetime: "20:22",
-      message: "Thank you for helping!",
-    ),
-    ChatData(
-      chatID: 2,
-      avatar: "Adam.png",
-      name: "Adam Smith",
-      datetime: "19:27",
-      message: "Thank you so much!",
-    ),
-  ];
+String _formatTimestamp(Timestamp timestamp) {
+  DateTime dateTime = timestamp.toDate();
+  return DateFormat.jm().format(dateTime);
 }
