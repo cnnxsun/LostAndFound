@@ -37,7 +37,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
       if (_selectedTab == _SelectedTab.Home) {
-        // Navigate to Profile
+        // Navigate to Homepage
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -49,13 +49,13 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
           MaterialPageRoute(builder: (context) => const FormPage()),
         );
       } else if (_selectedTab == _SelectedTab.Chat) {
-        // Navigate to Profile
+        // Navigate to Chat
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Chat()),
         );
       } else if (_selectedTab == _SelectedTab.AddPost) {
-        // Navigate to Profile
+        // Navigate to CreatePost
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const GoogleMapPage()),

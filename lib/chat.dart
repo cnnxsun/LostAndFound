@@ -24,7 +24,7 @@ class _Chat extends State<Chat> {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
       if (_selectedTab == _SelectedTab.Home) {
-        // Navigate to Profile
+        // Navigate to Homepage
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -36,13 +36,13 @@ class _Chat extends State<Chat> {
           MaterialPageRoute(builder: (context) => const FormPage()),
         );
       } else if (_selectedTab == _SelectedTab.Chat) {
-        // Navigate to Profile
+        // Navigate to Chat
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Chat()),
         );
       } else if (_selectedTab == _SelectedTab.AddPost) {
-        // Navigate to Profile
+        // Navigate to CreatePost
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const GoogleMapPage()),
@@ -60,15 +60,12 @@ class _Chat extends State<Chat> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Image.asset(
-              'notification_icon.png',
-              width: 44,
-              height: 44,
-            ),
+            color: const Color.fromARGB(255, 250, 86, 114),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsPage2()),
+                MaterialPageRoute(builder: (context) => const SettingsPage2()),
               );
             },
           ),
