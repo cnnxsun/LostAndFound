@@ -15,6 +15,18 @@ class SignUpPage extends StatelessWidget {
                 ? const Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: const Text(
+                          'Sign Up',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 50,
+                            color: Color(0xFF26117A),
+                          ),
+                        ),
+                      ),
                       _FormContent(),
                     ],
                   )
