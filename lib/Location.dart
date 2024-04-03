@@ -1,3 +1,5 @@
+// import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart'
     show
@@ -9,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart'
         Marker,
         MarkerId;
 import 'package:location/location.dart';
+import 'package:project1/CreatePost.dart';
 import 'homepage.dart';
 import 'package:project1/chat.dart';
 import 'package:project1/profile.dart';
@@ -36,20 +39,23 @@ Future<LocationData?> getCurrentLocation() async {
 }
 
 class GoogleMapPage extends StatefulWidget {
-  const GoogleMapPage({Key? key}) : super(key: key);
+  const GoogleMapPage({Key? key, required this.latitude, required this.longitude}) : super(key: key);
+  final double latitude;
+  final double longitude;
 
   @override
   _GoogleMapPageState createState() => _GoogleMapPageState();
 }
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
-  var _selectedTab = _SelectedTab.AddPost; // Nav bar
+  var _selectedTab = _SelectedTab.AddPost;
+  
   void _handleIndexChanged(int i) {
     // Nav bar
     setState(() {
       _selectedTab = _SelectedTab.values[i];
       if (_selectedTab == _SelectedTab.Home) {
-        // Navigate to Homepage
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -61,16 +67,16 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
           MaterialPageRoute(builder: (context) => const FormPage()),
         );
       } else if (_selectedTab == _SelectedTab.Chat) {
-        // Navigate to Chat
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Chat()),
         );
       } else if (_selectedTab == _SelectedTab.AddPost) {
-        // Navigate to CreatePost
+        // Navigate to Profile
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GoogleMapPage()),
+          MaterialPageRoute(builder: (context) => CreatePostPage()),
         );
       }
     });
@@ -97,8 +103,8 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
         _markers["currentLocation"] = Marker(
           markerId: MarkerId("currentLocation"),
           position: LatLng(
-            currentLocation!.latitude!,
-            currentLocation!.longitude!,
+            widget.latitude,
+            widget.longitude,
           ),
           infoWindow: InfoWindow(
             title: "Your Location",
@@ -109,7 +115,6 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
     }
   }
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +125,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                 mapController = controller;
               },
               initialCameraPosition: CameraPosition(
-                target: _center,
+                target: LatLng(widget.latitude, widget.longitude),
                 zoom: 14,
               ),
               markers: Set<Marker>.of(_markers.values),

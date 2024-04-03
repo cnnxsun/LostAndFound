@@ -3,6 +3,8 @@ import 'package:project1/signup.dart';
 import 'package:project1/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project1/globalvar.dart' as globals;
+
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -17,10 +19,9 @@ class SignInPage extends StatelessWidget {
           child: isSmallScreen
               ? Column(
                   mainAxisSize: MainAxisSize.min,
-                  children:  [
-                    Image.asset(
-                        'assets/logo.png'), // Assuming your logo is stored as 'logo.png' in the assets folder
-                    const _FormContent(),
+                  children: const [
+                    _Logo(),
+                    _FormContent(),
                   ],
                 )
               : Container(
@@ -220,13 +221,14 @@ class __FormContentState extends State<_FormContent> {
   Widget _gap() => const SizedBox(height: 16);
 }
 
+
 // from database
 Future<bool> loginUser(String email, String password) async {
   try {
     // Retrieve the user document from the "User" collection based on the provided email
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('User')
-        .where('email', isEqualTo: email)
+        .where('User_email' , isEqualTo: email)
         .get();
 
     // Check if any user with the provided email exists
@@ -235,10 +237,20 @@ Future<bool> loginUser(String email, String password) async {
       DocumentSnapshot userDoc = querySnapshot.docs.first;
 
       // Get the password stored in the user document
-      String storedPassword = userDoc['password'];
+      String storedPassword = userDoc['User_password'];
 
       // Check if the password matches the stored password
       if (password == storedPassword) {
+        globals.isLoggedIn=true;
+        globals.current_user = userDoc['User_username'].toString();
+        int? userId = await globals.getUserIdByEmail(email);
+        if (userId != null) {
+          globals.Current_userID=userId;
+        } else {
+          print("Error in fetching userID");
+}
+        print("Login as "+globals.current_user+ " UserID = "+ globals.Current_userID.toString());
+
         return true; // Return true if the email and password match
       } else {
         return false; // Return false if the password doesn't match
@@ -268,3 +280,4 @@ Future<bool> loginUser(String email, String password) async {
 //     return false; // Return false if an error occurs or authentication fails
 //   }
 // }
+
