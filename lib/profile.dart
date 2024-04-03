@@ -14,7 +14,6 @@ import 'package:project1/dot_navigation_bar.dart';
 import 'profileShowDetails.dart';
 import 'package:project1/globalvar.dart' as globals;
 
-
 import 'dart:io';
 
 enum _SelectedTab { Home, AddPost, Chat, Profile }
@@ -38,16 +37,12 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
   List<PickedFile> selectedImages = [];
   String current_user = globals.current_user.toString();
 
-bool validateInputs() {
-    return Name != null &&
-        Type != null &&
-        Breed != null &&
-        Gender != null &&
-        Description != null &&
-        selectedColors.isNotEmpty ;
+  // Function to validate if any of the required input fields are null
+  bool validateInputs() {
+    return Name != null && Type != null && Breed != null && Gender != null;
   }
 
- var _selectedTab = _SelectedTab.Profile; // Nav bar
+  var _selectedTab = _SelectedTab.Profile; // Nav bar
   void _handleIndexChanged(int i) {
     // Nav bar
     setState(() {
@@ -121,9 +116,10 @@ bool validateInputs() {
     "Red",
     "Gold"
   ];
-  
 
-  String documentId = globals.getDocumentIdByUserId('Pet', Current_userID).toString(); //Get docID for this user's pet
+  String documentId = globals
+      .getDocumentIdByUserId('Pet', Current_userID)
+      .toString(); //Get docID for this user's pet
 
   Future<void> _pickImage() async {
     try {
@@ -161,19 +157,20 @@ bool validateInputs() {
             ),
           ),
           actions: [
-          IconButton(
-            color: const Color.fromARGB(255, 250, 86, 114),
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage2()),
-              );
-            },
-          ),
-        ],
-        centerTitle: true,
-      ),
+            IconButton(
+              color: const Color.fromARGB(255, 250, 86, 114),
+              icon: const Icon(Icons.notifications),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsPage2()),
+                );
+              },
+            ),
+          ],
+          centerTitle: true,
+        ),
         body: Container(
           padding: const EdgeInsets.all(20),
           child: ListView(
@@ -386,38 +383,23 @@ bool validateInputs() {
                   }),
               const SizedBox(height: 32),
               CustomBtn(
-                title: const Text(
-                  "Save",
-                  style: TextStyle(color: Colors.white),
-                ),
-                callback: () async {
-                  // Handle the save action, e.g., print the selected colors and images
-                  print("Selected colors: $selectedColors");
-                  print("Selected images: $selectedImages");
-                  print("Gender: $Gender");
+                  title: const Text(
+                    "Save",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  callback: () async {
+                    // Handle the save action, e.g., print the selected colors and images
+                    print("Selected colors: $selectedColors");
+                    print("Selected images: $selectedImages");
+                    print("Gender: $Gender");
 
-                  print("Breed: $Breed");
-                  print("Name: $Name");
-                  print("Type: $Type");
-                  print("Description: $Description");
+                    print("Breed: $Breed");
+                    print("Name: $Name");
+                    print("Type: $Type");
+                    print("Description: $Description");
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => profileShowDetails(
-                              selectedColors: selectedColors,
-                              selectedImages: selectedImages,
-                              gender: Gender ?? "",
-                              breed: Breed ?? "",
-                              name: Name ?? "",
-                              type: Type ?? "",
-                              description: Description ?? ""
-                            )),
-                  );
-
-                  int count = await globals.getTotalDocumentCount('Pet');
-                   Map<String, String> dataToSave={
-                    
+                    int count = await globals.getTotalDocumentCount('Pet');
+                    Map<String, String> dataToSave = {
                       'User_ID': globals.Current_userID.toString(),
                       'Name': Name.toString(),
                       'Types': Type.toString(),
@@ -425,15 +407,51 @@ bool validateInputs() {
                       'Sex': Gender.toString(),
                       'Colors': selectedColors.toString(),
                       'Description': Description.toString(),
-                      'Pet_ID': (count+1).toString()
+                      'Pet_ID': (count + 1).toString()
                     };
-                    FirebaseFirestore.instance.collection('Pet').add(dataToSave);
-                },
-              ),
+                    if (validateInputs()) {
+                      FirebaseFirestore.instance
+                          .collection('Pet')
+                          .add(dataToSave);
+                      print("All inputs are valid. Saving data");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => profileShowDetails(
+                                selectedColors: selectedColors,
+                                selectedImages: selectedImages,
+                                gender: Gender ?? "",
+                                breed: Breed ?? "",
+                                name: Name ?? "",
+                                type: Type ?? "",
+                                description: Description ?? "")),
+                      );
+                    } else {
+                      // Show an error message or prompt the user to fill in all required fields
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Error"),
+                            content: const Text(
+                                "Please fill in all required fields."),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  }),
             ],
           ),
         ),
-        bottomNavigationBar: SizedBox( 
+        bottomNavigationBar: SizedBox(
           height: 160,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 0),

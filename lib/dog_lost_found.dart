@@ -544,7 +544,7 @@ class FetchUser extends StatelessWidget {
                   width: 50,
                   height: 50,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('UserStockImg.png'),
+                    backgroundImage: AssetImage('assets/Lom.png'),
                   ),
                 ),
                 SizedBox(width: 10),
