@@ -38,6 +38,15 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
   List<PickedFile> selectedImages = [];
   String current_user = globals.current_user.toString();
 
+bool validateInputs() {
+    return Name != null &&
+        Type != null &&
+        Breed != null &&
+        Gender != null &&
+        Description != null &&
+        selectedColors.isNotEmpty ;
+  }
+
  var _selectedTab = _SelectedTab.Profile; // Nav bar
   void _handleIndexChanged(int i) {
     // Nav bar
@@ -112,6 +121,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
     "Red",
     "Gold"
   ];
+  
 
   String documentId = globals.getDocumentIdByUserId('Pet', Current_userID).toString(); //Get docID for this user's pet
 
@@ -407,6 +417,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
 
                   int count = await globals.getTotalDocumentCount('Pet');
                    Map<String, String> dataToSave={
+                    
                       'User_ID': globals.Current_userID.toString(),
                       'Name': Name.toString(),
                       'Types': Type.toString(),
