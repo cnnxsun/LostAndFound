@@ -143,7 +143,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
         extendBody: true,
         appBar: AppBar(
           title: const Text(
-            "Profile",
+            "Create Post",
             style: TextStyle(
               color: Color.fromARGB(255, 34, 17, 112),
               fontSize: 25,

@@ -4,6 +4,7 @@ import 'package:project1/chat.dart';
 import 'package:project1/dot_navigation_bar.dart';
 import 'package:project1/homepage.dart';
 import 'package:project1/profile.dart';
+import 'package:project1/CreatePost.dart';
 
 enum _SelectedTab { Home, AddPost, Chat, Profile } // Nav bar
 
@@ -43,7 +44,7 @@ class _SettingsPage2State extends State<SettingsPage2> {
         // Navigate to CreatePost
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GoogleMapPage()),
+          MaterialPageRoute(builder: (context) => const CreatePostPage()),
         );
       }
     });

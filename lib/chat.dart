@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project1/Location.dart';
+import 'package:project1/CreatePost.dart';
 import 'package:project1/homepage.dart';
 import 'package:project1/message.dart';
 import 'package:project1/noti1.dart';
@@ -45,7 +45,7 @@ class _Chat extends State<Chat> {
         // Navigate to CreatePost
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GoogleMapPage()),
+          MaterialPageRoute(builder: (context) => const CreatePostPage()),
         );
       }
     });
