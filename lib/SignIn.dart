@@ -19,9 +19,10 @@ class SignInPage extends StatelessWidget {
           child: isSmallScreen
               ? Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    _Logo(),
-                    _FormContent(),
+                  children: [
+                    Image.asset(
+                        'assets/logo.png'), // Assuming your logo is stored as 'logo.png' in the assets folder
+                    const _FormContent(),
                   ],
                 )
               : Container(
