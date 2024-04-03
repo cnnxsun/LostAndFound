@@ -198,7 +198,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
               Row(
                 children: [
                   const Text(
-                    "Describe your pet",
+                    "Describe lost or found pet",
                     style: TextStyle(
                       fontSize: 24,
                       color: Color.fromARGB(255, 250, 86, 114),

@@ -200,7 +200,7 @@ class _MessageState extends State<Message> {
       'datetime': Timestamp.now(),
       'receipt': true,
       'name': 'Sarah',
-      'avatar': 'Sarah.png',
+      'avatar': 'assets/Lom.png',
     };
 
     await firestore

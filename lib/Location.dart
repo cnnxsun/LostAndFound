@@ -39,7 +39,9 @@ Future<LocationData?> getCurrentLocation() async {
 }
 
 class GoogleMapPage extends StatefulWidget {
-  const GoogleMapPage({Key? key, required this.latitude, required this.longitude}) : super(key: key);
+  const GoogleMapPage(
+      {Key? key, required this.latitude, required this.longitude})
+      : super(key: key);
   final double latitude;
   final double longitude;
 
@@ -48,8 +50,8 @@ class GoogleMapPage extends StatefulWidget {
 }
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
-  var _selectedTab = _SelectedTab.AddPost;
-  
+  var _selectedTab = _SelectedTab.Home;
+
   void _handleIndexChanged(int i) {
     // Nav bar
     setState(() {

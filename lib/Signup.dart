@@ -11,25 +11,41 @@ class SignUpPage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Center(
-            child: isSmallScreen
-                ? const Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _FormContent(),
-                    ],
-                  )
-                : Container(
-                    padding: const EdgeInsets.all(32.0),
-                    constraints: const BoxConstraints(maxWidth: 800),
-                    child: const Row(
-                      children: [
-                        Expanded(
-                          child: Center(child: _FormContent()),
+      body: Center(
+        child: SingleChildScrollView(
+          child: isSmallScreen
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: const Text(
+                        'Sign Up',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 50,
+                          color: Color(0xFF26117A),
                         ),
-                      ],
+                      ),
                     ),
-                  )));
+                    _FormContent(),
+                  ],
+                )
+              : Container(
+                  padding: const EdgeInsets.all(32.0),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(child: _FormContent()),
+                      ),
+                    ],
+                  ),
+                ),
+        ),
+      ),
+    );
   }
 }
 
@@ -77,6 +93,7 @@ class __FormContentState extends State<_FormContent> {
   String? email;
   String? password;
   String? confirmPassword;
+  String? location;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -154,6 +171,24 @@ class __FormContentState extends State<_FormContent> {
             TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
+                  return 'Please enter information';
+                }
+                setState(() {
+                  location = value;
+                });
+                return null;
+              },
+              decoration: const InputDecoration(
+                labelText: 'Location',
+                hintText: 'Enter your location',
+                prefixIcon: Icon(Icons.location_city),
+                border: OutlineInputBorder(),
+              ),
+            ),
+            _gap(),
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
                   return 'Please enter some text';
                 }
 
@@ -219,28 +254,29 @@ class __FormContentState extends State<_FormContent> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                   ),
-                ),
-                onPressed: () async {
-                  if (_formKey.currentState?.validate() ?? false) {
-
-                    int count = await globals.getTotalDocumentCount('User');
-                    Map<String, String> dataToSave={
-                      'User_FullName': fullName.toString(),
-                      'User_email': email.toString(),
-                      'User_password': password.toString(),
-                      'User_username': userName.toString(),
-                      'User_ID': (count + 1).toString(),
-                      'User_Img': ""
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Sign Up',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      int count = await globals.getTotalDocumentCount('User');
+                      Map<String, String> dataToSave = {
+                        'User_FullName': fullName.toString(),
+                        'User_email': email.toString(),
+                        'User_password': password.toString(),
+                        'User_username': userName.toString(),
+                        'User_ID': (count + 1).toString(),
+                        'User_Img': "",
+                        'User_Location': location.toString()
                       };
                       await FirebaseFirestore.instance
                           .collection('User')

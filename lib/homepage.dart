@@ -538,7 +538,7 @@ class UserInfo extends StatelessWidget {
           //   style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF26117A)),
           // ),
           SizedBox(height: 20),
-          ContactButton(),
+          // ContactButton(),
           SizedBox(height: 10), // Add some vertical spacing
           
           FutureBuilder<List<double?>>(
@@ -574,28 +574,28 @@ class UserInfo extends StatelessWidget {
 }
 
 
-class ContactButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFFFA5672), // Oval pink contact button color
-      ),
-      child: TextButton(
-        onPressed: () {
-          // Add functionality for contact button
-        },
-        child: const Text(
-          'Contact',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-  }
-}
+// class ContactButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: double.infinity,
+//       margin: const EdgeInsets.symmetric(horizontal: 16),
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(20),
+//         color: const Color(0xFFFA5672), // Oval pink contact button color
+//       ),
+//       child: TextButton(
+//         onPressed: () {
+//           // Add functionality for contact button
+//         },
+//         child: const Text(
+//           'Contact',
+//           style: TextStyle(color: Colors.white),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class LocationButton extends StatelessWidget {
   final double latitude;
@@ -610,7 +610,7 @@ class LocationButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Color.fromARGB(255, 91, 177, 57), // Oval pink contact button color
+        color: const Color(0xFFFA5672), // Oval pink contact button color
       ),
       child: TextButton(
         onPressed: () {
@@ -732,350 +732,3 @@ class FetchUser extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// class UserInfo extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               const SizedBox(
-//                 width: 50,
-//                 height: 50,
-//                 child: CircleAvatar(
-//                   backgroundImage: AssetImage('assets/qndska.png'),
-//                 ),
-//               ),
-//               const SizedBox(width: 10),
-//               Expanded(
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     const Row(
-//                       children: [
-//                         Text(
-//                           'Qndska',
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold,
-//                               color: Color(0xFF26117A)),
-//                         ),
-//                         Spacer(),
-//                         Text(
-//                           '...',
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold, color: Colors.black),
-//                         ),
-//                       ],
-//                     ),
-//                     const SizedBox(height: 5),
-//                     Text(
-//                       'Salaya, Phutthamonthon District, Nakhon Pathom',
-//                       style: TextStyle(color: Colors.grey[400]!, fontSize: 12),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 20),
-//           ClipRRect(
-//             borderRadius: BorderRadius.circular(20),
-//             child: SizedBox(
-//               height: 210,
-//               width: double.infinity,
-//               child: Image.asset(
-//                 'assets/cat.png',
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           const SizedBox(height: 20),
-//           const Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Row(
-//                 children: [
-//                   Text('Name: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))), // Added 3 tabs
-//                   SizedBox(width: 62),
-//                   Text('Percy', style: TextStyle(color: Colors.black)),
-//                   Spacer(),
-//                   Text('Missing!!!',
-//                       style: TextStyle(color: Color(0xFFFF0E0E))),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Type: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 69),
-//                   Text('Cat', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Breed: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 64),
-//                   Text('Domestic Shorthair',
-//                       style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Gender: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))), // Added 3 tabs
-//                   SizedBox(width: 54),
-//                   Text('Male', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Color: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 65),
-//                   Text('White/Orange', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Description: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 30),
-//                   Text('...', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               SizedBox(height: 10),
-//               Text('8 m ago',
-//                   style: TextStyle(color: Color(0xFF979797), fontSize: 12)),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//           ContactButton(),
-//           const SizedBox(height: 10),
-//           LocationButton(),
-//           const SizedBox(height: 10),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class ContactButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       margin: const EdgeInsets.symmetric(horizontal: 16),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(20),
-//         color: const Color(0xFFFA5672), // Oval pink contact button color
-//       ),
-//       child: TextButton(
-//         onPressed: () {
-//           // Add functionality for contact button
-//         },
-//         child: const Text(
-//           'Contact',
-//           style: TextStyle(color: Colors.white),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class LocationButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       margin: const EdgeInsets.symmetric(horizontal: 16),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(20),
-//         color: Color.fromARGB(255, 91, 177, 57), // Oval pink contact button color
-//       ),
-//       child: TextButton(
-//         onPressed: () {
-//           Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => GoogleMapPage()),
-//           );
-//         },
-//         child: const Text(
-//           'Location',
-//           style: TextStyle(color: Colors.white),
-//         ),
-//       ),
-      
-//     );
-//   }
-// }
-
-// class UserInfofound extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               const SizedBox(
-//                 width: 50,
-//                 height: 50,
-//                 child: CircleAvatar(
-//                   backgroundImage: AssetImage('assets/guwon.png'),
-//                 ),
-//               ),
-//               const SizedBox(width: 10),
-//               Expanded(
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     const Row(
-//                       children: [
-//                         Text(
-//                           'Guwon',
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold,
-//                               color: Color(0xFF26117A)),
-//                         ),
-//                         Spacer(),
-//                         Text(
-//                           '...',
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold, color: Colors.black),
-//                         ),
-//                       ],
-//                     ),
-//                     const SizedBox(height: 5),
-//                     Text(
-//                       'Salaya, Phutthamonthon District, Nakhon Pathom',
-//                       style: TextStyle(color: Colors.grey[400]!, fontSize: 12),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 20),
-//           ClipRRect(
-//             borderRadius: BorderRadius.circular(20),
-//             child: SizedBox(
-//               height: 210,
-//               width: double.infinity,
-//               child: Image.asset(
-//                 'assets/ragdoll.png',
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           const SizedBox(height: 20),
-//           const Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Row(
-//                 children: [
-//                   Text('Name: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))), // Added 3 tabs
-//                   SizedBox(width: 62),
-//                   Text('Lauren', style: TextStyle(color: Colors.black)),
-//                   Spacer(),
-//                   Text('found!!!', style: TextStyle(color: Color(0xFF5DB075))),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Type: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 69),
-//                   Text('Cat', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Breed: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 64),
-//                   Text('Ragdoll', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Gender: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))), // Added 3 tabs
-//                   SizedBox(width: 54),
-//                   Text('Female', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Color: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 65),
-//                   Text('White/Brown', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               Row(
-//                 children: [
-//                   SizedBox(height: 10),
-//                   Text('Description: ',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: Color(0xFF26117A))),
-//                   SizedBox(width: 30),
-//                   Text('...', style: TextStyle(color: Colors.black)),
-//                 ],
-//               ),
-//               SizedBox(height: 10),
-//               Text('8 m ago',
-//                   style: TextStyle(color: Color(0xFF979797), fontSize: 12)),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//           ContactButton(),
-//           const SizedBox(height: 10),
-//         ],
-//       ),
-//     );
-//   }
-// }
