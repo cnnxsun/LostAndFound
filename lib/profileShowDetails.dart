@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project1/CreatePost.dart';
 import 'package:project1/Location.dart';
 import 'package:project1/SignIn.dart';
 import 'package:project1/chat.dart';
 import 'package:project1/dot_navigation_bar.dart';
 import 'package:project1/homepage.dart';
 import 'package:project1/profile.dart';
+import 'package:project1/globalvar.dart' as globals;
 
 enum _SelectedTab { Home, AddPost, Chat, Profile } // Nav bar
 
@@ -27,7 +29,7 @@ class profileShowDetails extends StatefulWidget {
     required this.breed,
     required this.name,
     required this.type,
-    required this.description,
+    required this.description
   });
 
   @override
@@ -41,7 +43,7 @@ class _profileShowDetailsState extends State<profileShowDetails> {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
       if (_selectedTab == _SelectedTab.Home) {
-        // Navigate to Homepage
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -53,16 +55,16 @@ class _profileShowDetailsState extends State<profileShowDetails> {
           MaterialPageRoute(builder: (context) => const FormPage()),
         );
       } else if (_selectedTab == _SelectedTab.Chat) {
-        // Navigate to Chat
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Chat()),
         );
       } else if (_selectedTab == _SelectedTab.AddPost) {
-        // Navigate to CreatePost
+        // Navigate to Profile
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GoogleMapPage()),
+          MaterialPageRoute(builder: (context) => CreatePostPage()),
         );
       }
     });
@@ -120,7 +122,7 @@ class _profileShowDetailsState extends State<profileShowDetails> {
             RichText(
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
-                children: const [
+                children: [
                   TextSpan(
                     text: 'Hi ',
                     style: TextStyle(
@@ -129,7 +131,7 @@ class _profileShowDetailsState extends State<profileShowDetails> {
                     ),
                   ),
                   TextSpan(
-                    text: 'Feverrr',
+                    text: globals.current_user,
                     style: TextStyle(
                       color: Color.fromARGB(255, 250, 86, 114),
                       fontSize: 30,

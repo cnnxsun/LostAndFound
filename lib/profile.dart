@@ -1,14 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project1/CreatePost.dart';
 import 'package:project1/Location.dart';
 import 'package:project1/SignIn.dart';
 import 'package:project1/chat.dart';
+import 'package:project1/globalvar.dart';
 import 'package:project1/homepage.dart';
 import 'package:project1/noti1.dart';
 import 'package:project1/widgets/custom_button.dart';
 import 'package:project1/custom_input.dart';
 import 'package:project1/dot_navigation_bar.dart';
 import 'profileShowDetails.dart';
+import 'package:project1/globalvar.dart' as globals;
+
 
 import 'dart:io';
 
@@ -31,13 +36,15 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
   String? selectedGender;
   List<String> selectedColors = [];
   List<PickedFile> selectedImages = [];
+  String current_user = globals.current_user.toString();
+
  var _selectedTab = _SelectedTab.Profile; // Nav bar
   void _handleIndexChanged(int i) {
     // Nav bar
     setState(() {
       _selectedTab = _SelectedTab.values[i];
       if (_selectedTab == _SelectedTab.Home) {
-        // Navigate to Homepage
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -49,16 +56,16 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
           MaterialPageRoute(builder: (context) => const FormPage()),
         );
       } else if (_selectedTab == _SelectedTab.Chat) {
-        // Navigate to Chat
+        // Navigate to Profile
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Chat()),
         );
       } else if (_selectedTab == _SelectedTab.AddPost) {
-        // Navigate to CreatePost
+        // Navigate to Profile
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GoogleMapPage()),
+          MaterialPageRoute(builder: (context) => CreatePostPage()),
         );
       }
     });
@@ -105,6 +112,8 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
     "Red",
     "Gold"
   ];
+
+  String documentId = globals.getDocumentIdByUserId('Pet', Current_userID).toString(); //Get docID for this user's pet
 
   Future<void> _pickImage() async {
     try {
@@ -162,7 +171,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
               RichText(
                 text: TextSpan(
                   style: DefaultTextStyle.of(context).style,
-                  children: const [
+                  children: [
                     TextSpan(
                       text: 'Hi ',
                       style: TextStyle(
@@ -171,7 +180,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
                       ),
                     ),
                     TextSpan(
-                      text: 'Feverrr',
+                      text: current_user,
                       style: TextStyle(
                         color: Color.fromARGB(255, 250, 86, 114),
                         fontSize: 30,
@@ -371,7 +380,7 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
                   "Save",
                   style: TextStyle(color: Colors.white),
                 ),
-                callback: () {
+                callback: () async {
                   // Handle the save action, e.g., print the selected colors and images
                   print("Selected colors: $selectedColors");
                   print("Selected images: $selectedImages");
@@ -392,15 +401,28 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
                               breed: Breed ?? "",
                               name: Name ?? "",
                               type: Type ?? "",
-                              description: Description ?? "",
+                              description: Description ?? ""
                             )),
                   );
+
+                  int count = await globals.getTotalDocumentCount('Pet');
+                   Map<String, String> dataToSave={
+                      'User_ID': globals.Current_userID.toString(),
+                      'Name': Name.toString(),
+                      'Types': Type.toString(),
+                      'Breed': Breed.toString(),
+                      'Sex': Gender.toString(),
+                      'Colors': selectedColors.toString(),
+                      'Description': Description.toString(),
+                      'Pet_ID': (count+1).toString()
+                    };
+                    FirebaseFirestore.instance.collection('Pet').add(dataToSave);
                 },
               ),
             ],
           ),
         ),
-        bottomNavigationBar: SizedBox(
+        bottomNavigationBar: SizedBox( 
           height: 160,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 0),

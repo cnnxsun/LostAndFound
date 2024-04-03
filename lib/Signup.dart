@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project1/SignIn.dart';
+import 'package:project1/globalvar.dart' as globals;
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -15,18 +16,6 @@ class SignUpPage extends StatelessWidget {
                 ? const Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 30),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: const Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 50,
-                            color: Color(0xFF26117A),
-                          ),
-                        ),
-                      ),
                       _FormContent(),
                     ],
                   )
@@ -230,43 +219,51 @@ class __FormContentState extends State<_FormContent> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Sign Up',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      Map<String, String> dataToSave = {
-                        'fullName': fullName.toString(),
-                        'email': email.toString(),
-                        'password': password.toString(),
-                        'username': userName.toString(),
-                        'userID': "",
-                        'avatar': ""
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState?.validate() ?? false) {
+
+                    int count = await globals.getTotalDocumentCount('User');
+                    Map<String, String> dataToSave={
+                      'User_FullName': fullName.toString(),
+                      'User_email': email.toString(),
+                      'User_password': password.toString(),
+                      'User_username': userName.toString(),
+                      'User_ID': (count + 1).toString(),
+                      'User_Img': ""
                       };
-                      FirebaseFirestore.instance
+                      await FirebaseFirestore.instance
                           .collection('User')
                           .add(dataToSave);
+
+                      // Navigate to the SignInPage after sign-up
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInPage(),
+                          ));
                     }
                   }),
             ),
             _gap(),
             TextButton(
               onPressed: () {
-                // Navigate to the SignUp page
+                // Navigate to the SignInPage
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const SignInPage()), // Replace SignUp with your actual SignUp class/widget
+                    builder: (context) => const SignInPage(),
+                  ),
                 );
               },
               child: const Text("Already have an account? Sign In"),
