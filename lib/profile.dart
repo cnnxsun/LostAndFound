@@ -146,8 +146,8 @@ class _FormPageState extends State<FormPage> with TickerProviderStateMixin {
           title: const Text(
             "Profile",
             style: TextStyle(
-              color: Color.fromARGB(255, 34, 17, 112),
-              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF26117A),
             ),
           ),
           actions: [

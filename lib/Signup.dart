@@ -254,29 +254,29 @@ class __FormContentState extends State<_FormContent> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Sign Up',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      int count = await globals.getTotalDocumentCount('User');
-                      Map<String, String> dataToSave = {
-                        'User_FullName': fullName.toString(),
-                        'User_email': email.toString(),
-                        'User_password': password.toString(),
-                        'User_username': userName.toString(),
-                        'User_ID': (count + 1).toString(),
-                        'User_Img': "",
-                        'User_Location': location.toString()
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState?.validate() ?? false) {
+
+                    int count = await globals.getTotalDocumentCount('User');
+                    Map<String, String> dataToSave={
+                      'User_FullName': fullName.toString(),
+                      'User_email': email.toString(),
+                      'User_password': password.toString(),
+                      'User_username': userName.toString(),
+                      'User_ID': (count + 1).toString(),
+                      'User_Img': "",
+                      'User_Location': location.toString()
                       };
                       await FirebaseFirestore.instance
                           .collection('User')

@@ -405,7 +405,7 @@ final userInfoWidgets = documents.map((doc) {
               longitude: data['Longtitude'] ?? '',
               postId: data['Post_ID'] ?? '',
               UserID: data['User_ID'] ?? '',
-
+              Status: data['Status'] ?? '',
             );
             
           }).toList();
@@ -450,6 +450,7 @@ class UserInfo extends StatelessWidget {
   final String longitude;
   final String postId;
   final String UserID;
+  final String Status;
 
   UserInfo({
     required this.Name,
@@ -463,6 +464,7 @@ class UserInfo extends StatelessWidget {
     required this.longitude,
     required this.postId,
     required this.UserID,
+    required this.Status
   });
 
   @override
@@ -496,6 +498,10 @@ class UserInfo extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Text(
+            'Status: $Status',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 199, 30, 7)),
           ),
           Text(
             'Name: $Name',
@@ -538,7 +544,7 @@ class UserInfo extends StatelessWidget {
           //   style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF26117A)),
           // ),
           SizedBox(height: 20),
-          // ContactButton(),
+          ContactButton(),
           SizedBox(height: 10), // Add some vertical spacing
           
           FutureBuilder<List<double?>>(
@@ -574,28 +580,28 @@ class UserInfo extends StatelessWidget {
 }
 
 
-// class ContactButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       margin: const EdgeInsets.symmetric(horizontal: 16),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(20),
-//         color: const Color(0xFFFA5672), // Oval pink contact button color
-//       ),
-//       child: TextButton(
-//         onPressed: () {
-//           // Add functionality for contact button
-//         },
-//         child: const Text(
-//           'Contact',
-//           style: TextStyle(color: Colors.white),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class ContactButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: const Color(0xFFFA5672), // Oval pink contact button color
+      ),
+      child: TextButton(
+        onPressed: () {
+          // Add functionality for contact button
+        },
+        child: const Text(
+          'Contact',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
 
 class LocationButton extends StatelessWidget {
   final double latitude;
@@ -610,7 +616,7 @@ class LocationButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFFFA5672), // Oval pink contact button color
+        color: const Color(0xFF26117A), 
       ),
       child: TextButton(
         onPressed: () {
@@ -651,7 +657,7 @@ class FetchUser extends StatelessWidget {
                   width: 50,
                   height: 50,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('UserStockImg.png'),
+                    backgroundImage: AssetImage('assets/Lom.png'),
                   ),
                 ),
                 SizedBox(width: 10),

@@ -105,12 +105,12 @@ class __FormContentState extends State<_FormContent> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
                   }
-                  // bool emailValid = RegExp(
-                  //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  //     .hasMatch(value);
-                  // if (!emailValid) {
-                  //   return 'Please enter a valid email';
-                  // }
+                  bool emailValid = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value);
+                  if (!emailValid) {
+                    return 'Please enter a valid email';
+                  }
                   email = value;
 
                   return null;

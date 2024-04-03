@@ -37,6 +37,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
   DateTime? MissingDate;
   String? Latitude;
   String? Longtitude;
+  String? Status;
   List<String> selectedColors = [];
   List<PickedFile> selectedImages = [];
   String current_user = globals.current_user.toString();
@@ -198,7 +199,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
               Row(
                 children: [
                   const Text(
-                    "Describe lost or found pet",
+                    "Describe pet",
                     style: TextStyle(
                       fontSize: 24,
                       color: Color.fromARGB(255, 250, 86, 114),
@@ -248,6 +249,28 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                 ),
               ),
               const SizedBox(height: 16),
+
+              DropdownButtonFormField(
+                decoration: const InputDecoration(
+                  hintText: "Status",
+                  border: OutlineInputBorder(),
+                ),
+                value: Status,
+                onChanged: (newValue) {
+                  setState(() {
+                    Status = newValue.toString();
+                  });
+                },
+                items: ["Lost", "Found"]
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 16),
+
               CustomInput(
                   hint: "Name...",
                   inputBorder: const OutlineInputBorder(),
@@ -256,6 +279,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                       Name = value;
                     });
                   }),
+
               DropdownButtonFormField(
                 decoration: const InputDecoration(
                   hintText: "Types",
@@ -276,6 +300,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                   );
                 }).toList(),
               ),
+
               const SizedBox(height: 16),
               CustomInput(
                   hint: "Breed",
@@ -406,6 +431,7 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                   print("Description: $Description");
                   print("Latitude: $Latitude");
                   print("Longtitude: $Longtitude");
+                  print("Status: $Status");
 
                   int count = await globals.getTotalDocumentCount('Post');
                    Map<String, String> dataToSave={
@@ -419,7 +445,8 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                       'Latitude': Latitude.toString(),
                       'Longtitude': Longtitude.toString(),
                       'Post_ID': (count+1).toString(),
-                      'CreatedOn': DateTime.now().toString()
+                      'CreatedOn': DateTime.now().toString(),
+                      'Status': Status.toString()
                     };
                     FirebaseFirestore.instance.collection('Post').add(dataToSave);
                 },

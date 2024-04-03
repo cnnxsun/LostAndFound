@@ -305,7 +305,7 @@ final userInfoWidgets = documents.map((doc) {
               longitude: data['Longtitude'] ?? '',
               postId: data['Post_ID'] ?? '',
               UserID: data['User_ID'] ?? '',
-
+              Status: data['Status'] ?? '',
             );
             
           }).toList();
@@ -350,6 +350,7 @@ class UserInfo extends StatelessWidget {
   final String longitude;
   final String postId;
   final String UserID;
+  final String Status;
 
   UserInfo({
     required this.Name,
@@ -363,6 +364,7 @@ class UserInfo extends StatelessWidget {
     required this.longitude,
     required this.postId,
     required this.UserID,
+    required this.Status,
   });
 
   @override
@@ -390,6 +392,10 @@ class UserInfo extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Text(
+            'Status: $Status',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 199, 30, 7)),
           ),
           Text(
             'Name: $Name',
