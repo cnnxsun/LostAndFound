@@ -374,7 +374,7 @@ class UserInfo extends StatelessWidget {
 
     // Conditionally set the asset path based on the type variable
     if (type == 'Others') {
-      assetPath = 'assets/BlueBird.png';
+      assetPath = 'assets/GlodBird.png';
       return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(

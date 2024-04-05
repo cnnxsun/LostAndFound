@@ -42,18 +42,6 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
   List<PickedFile> selectedImages = [];
   String current_user = globals.current_user.toString();
 
-  // Function to validate if any of the required input fields are null
-  bool validateInputs() {
-    return Name != null &&
-        Type != null &&
-        Breed != null &&
-        Gender != null &&
-        Description != null &&
-        Status != null &&
-        Latitude != null &&
-        Longtitude != null ;
-  }
-
  var _selectedTab = _SelectedTab.AddPost; // Nav bar
   void _handleIndexChanged(int i) {
     // Nav bar
@@ -158,8 +146,8 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
           title: const Text(
             "Create Post",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF26117A),
+              color: Color.fromARGB(255, 34, 17, 112),
+              fontSize: 25,
             ),
           ),
           actions: [
@@ -445,12 +433,8 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                   print("Longtitude: $Longtitude");
                   print("Status: $Status");
 
-                  if (validateInputs()) 
-                  {
-                    // Handle the save action if all inputs are valid
-                    print("All inputs are valid. Saving data...");
-                    int count = await globals.getTotalDocumentCount('Post');
-                    Map<String, String> dataToSave = {
+                  int count = await globals.getTotalDocumentCount('Post');
+                   Map<String, String> dataToSave={
                       'User_ID': globals.Current_userID.toString(),
                       'Name': Name.toString(),
                       'Types': Type.toString(),
@@ -460,43 +444,13 @@ class _CreatePost extends State<CreatePostPage> with TickerProviderStateMixin {
                       'Description': Description.toString(),
                       'Latitude': Latitude.toString(),
                       'Longtitude': Longtitude.toString(),
-                      'Post_ID': (count + 1).toString(),
+                      'Post_ID': (count+1).toString(),
                       'CreatedOn': DateTime.now().toString(),
                       'Status': Status.toString()
                     };
-                    FirebaseFirestore.instance
-                        .collection('Post')
-                        .add(dataToSave);
-                  }
-                  else 
-          {
-          // Show an error message or prompt the user to fill in all required fields
-          showDialog
-          (
-            context: context,
-            builder: (BuildContext context) 
-            {
-              return AlertDialog
-              (
-                title: const Text("Error"),
-                content: const Text("Please fill in all required fields."),
-                actions: 
-                [
-                  TextButton
-                  (
-                    onPressed: () 
-                    {
-                      Navigator.pop(context); // Close the dialog
-                    },
-                    child: const Text("OK")
-                  )
-                ]
-              );
-
-            }
-          );
-          }
-  }),
+                    FirebaseFirestore.instance.collection('Post').add(dataToSave);
+                },
+              ),
             ],
           ),
         ),

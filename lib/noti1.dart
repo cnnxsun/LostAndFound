@@ -8,7 +8,6 @@ import 'package:project1/CreatePost.dart';
 
 enum _SelectedTab { Home, AddPost, Chat, Profile } // Nav bar
 
-
 class SettingsPage2 extends StatefulWidget {
   const SettingsPage2({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class SettingsPage2 extends StatefulWidget {
 }
 
 class _SettingsPage2State extends State<SettingsPage2> {
- var _selectedTab = _SelectedTab.Profile; // Nav bar
+  var _selectedTab = _SelectedTab.Profile; // Nav bar
   void _handleIndexChanged(int i) {
     // Nav bar
     setState(() {
@@ -49,6 +48,7 @@ class _SettingsPage2State extends State<SettingsPage2> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +58,7 @@ class _SettingsPage2State extends State<SettingsPage2> {
         // Line
         //elevation: 0,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(12), //space between text and line 
+          preferredSize: Size.fromHeight(12), //space between text and line
           child: Container(
             height: 2.0, //Line Size
             color: const Color.fromARGB(255, 250, 86, 114),
@@ -75,49 +75,49 @@ class _SettingsPage2State extends State<SettingsPage2> {
         ),
         centerTitle: true,
       ),
-        body: Center(
-          child: Container(
-            child: ListView(
-              children: [
-                _SingleSection(
-                  title: "New",
-                  children: [
-                    const _CustomListTile(
-                        title: "Guwon posted a new Found!!! post    8m",
-                        imagePath: "Guwon.png",
-                      ),
-                      SizedBox(height: 10.0),
-                    const _CustomListTile(
-                        title: "Adam Smith sent a message to you    9 m ",
-                        imagePath: "Adam.png",
-                      ),
-                  ],
-                ),
-                const Divider(),
-                const _SingleSection(
-                  title: "Yesterday",
-                  children: [
-                    _CustomListTile(
-                        title: "Adam Smith matched with Pepper    8 h ",
-                        imagePath: "Adam.png",
-                      ),
-                  ],
-                ),
-                const Divider(),
-                const _SingleSection(
-                  title: "Last 30 days",
-                  children: [
-                    _CustomListTile(
-                        title: "Guwon posted a new Missing!!! post  1 w ",
-                        imagePath: "Guwon.png",
-                        ),
-                  ],
-                ),
-              ],
-            ),
+      body: Center(
+        child: Container(
+          child: ListView(
+            children: [
+              _SingleSection(
+                title: "New",
+                children: [
+                  const _CustomListTile(
+                    title: "Guwon posted a new Found!!! post    8m",
+                    imagePath: "assets/guwon.png",
+                  ),
+                  SizedBox(height: 10.0),
+                  const _CustomListTile(
+                    title: "Adam Smith sent a message to you    9 m ",
+                    imagePath: "assets/adam.png",
+                  ),
+                ],
+              ),
+              const Divider(),
+              const _SingleSection(
+                title: "Yesterday",
+                children: [
+                  _CustomListTile(
+                    title: "Adam Smith matched with Pepper    8 h ",
+                    imagePath: "assets/adam.png",
+                  ),
+                ],
+              ),
+              const Divider(),
+              const _SingleSection(
+                title: "Last 30 days",
+                children: [
+                  _CustomListTile(
+                    title: "Guwon posted a new Missing!!! post  1 w ",
+                    imagePath: "assets/guwon.png",
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-         bottomNavigationBar: SizedBox(
+      ),
+      bottomNavigationBar: SizedBox(
         // Nav bar
         height: 160,
         child: Padding(
@@ -158,10 +158,9 @@ class _SettingsPage2State extends State<SettingsPage2> {
           ),
         ),
       ),
-      );
-   }
+    );
+  }
 }
-
 
 class _CustomListTile extends StatelessWidget {
   final String title;
@@ -176,44 +175,45 @@ class _CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Navigate to the next page here
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => Chat(),
-          ),
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: const Color.fromARGB(255, 250, 86, 114),
-                width: 2.0,
+        onTap: () {
+          // Navigate to the next page here
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => Chat(),
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 250, 86, 114),
+                    width: 2.0,
+                  ),
+                ),
+                child: CircleAvatar(
+                  radius: 24,
+                  backgroundImage: AssetImage(imagePath),
+                ),
               ),
-            ),
-            child:  CircleAvatar(
-            radius: 24,
-            backgroundImage: AssetImage(imagePath),
-            ),
+              const SizedBox(width: 15.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 15.0),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-        ],
-      ),
-      )
-    );
+        ));
   }
 }
 
@@ -237,7 +237,10 @@ class _SingleSection extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               title!,
-              style: const TextStyle(fontSize: 20, color: Color(0xFF26117A), fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF26117A),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         Column(
